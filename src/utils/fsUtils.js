@@ -23,6 +23,13 @@ const getAllActivities = async () => {
   return activities;
 }
 
+const getActivityById = async (id) => {
+  const activities = await readActivities();
+  const findActivity = activities.find((activity) => activity.id === id);
+  return findActivity;
+}
+
 module.exports = {
   getAllActivities,
+  getActivityById,
 }
