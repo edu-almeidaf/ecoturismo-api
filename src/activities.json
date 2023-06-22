@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Trekking",
+    "price": 0,
+    "description": {
+      "rating": 1,
+      "difficulty": "Difícil",
+      "createdAt": "31/12/2021"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Caminhada",
+    "price": 10,
+    "description": {
+      "rating": 2,
+      "difficulty": "Fácil",
+      "createdAt": "02/01/2021"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Canionismo",
+    "price": 6,
+    "description": {
+      "rating": 4,
+      "difficulty": "Difícil",
+      "createdAt": "18/04/2020"
+    }
+  }
+]

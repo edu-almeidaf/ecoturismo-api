@@ -13,8 +13,8 @@ const readActivities = async () => {
 }
 
 const writeActivities = async (data) => {
-  const convertedData = JSON.stringify(data);
-  await fs.writeFile(resolve(__dirname, path), convertedData);
+  const convertedData = JSON.stringify(data, null, 2);
+  await fs.writeFile(resolve(__dirname, ACTIVITIES_FILE_PATH), convertedData);
 }
 
 const getAllActivities = async () => {
@@ -29,7 +29,20 @@ const getActivityById = async (id) => {
   return findActivity;
 }
 
+const addActivity = async (newActivity) => {
+  const activities = await readActivities();
+  const newActivityWithId = {
+    id: activities[activities.length - 1].id + 1,
+    ...newActivity,
+  };
+  
+  const newActivities = [...activities, newActivityWithId];
+
+  await writeActivities(newActivities);
+};
+
 module.exports = {
   getAllActivities,
   getActivityById,
+  addActivity,
 }
