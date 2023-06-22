@@ -41,8 +41,27 @@ const addActivity = async (newActivity) => {
   await writeActivities(newActivities);
 };
 
+const updateActivity = async (id, newActivity) => {
+  const activities = await readActivities();
+  const newActivityWithId = { id, ...newActivity };
+
+  const index = activities.findIndex((activity) => activity.id === id);
+  if (index === -1) return null;
+
+  const newArray = activities.reduce((arr, currentActivity) => {
+    if (currentActivity.id === newActivityWithId.id) {
+      return [...arr, newActivityWithId];
+    }
+    return [...arr, currentActivity];
+  }, []);
+
+  await writeActivities(newArray);
+  return newActivityWithId;
+};
+
 module.exports = {
   getAllActivities,
   getActivityById,
   addActivity,
+  updateActivity,
 }

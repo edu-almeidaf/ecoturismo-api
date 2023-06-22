@@ -1,7 +1,7 @@
 const express = require('express');
 
 const {
-  getAllActivities, getActivityById, addActivity
+  getAllActivities, getActivityById, addActivity, updateActivity
 } = require('../utils/fsUtils');
 const validateToken = require('../middleware/validateToken');
 const validateName = require('../middleware/validateName');
@@ -42,6 +42,21 @@ validateCreatedAt, async (req, res) => {
   await addActivity(newActivity);
 
   return res.status(201).json({ message: 'Atividade registrada com sucesso!' });
+});
+
+router.put('/:id', validateToken, validateName, validatePrice,
+  validateDescription, validateRating, validateDifficulty,
+  validateCreatedAt, async (req, res) => {
+  const { id } = req.params;
+  const updatedActivity = await updateActivity(Number(id), req.body);
+
+  if (updatedActivity === null) {
+    return res.status(404).json({ message: 'Atividade não encontrada' });
+  }
+
+  return res.status(200).json({
+    message: 'Atividade atualizada com sucesso!',
+  });
 });
 
 module.exports = router;
