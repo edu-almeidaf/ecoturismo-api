@@ -48,12 +48,21 @@ const updateActivity = async (id, newActivity) => {
   const index = activities.findIndex((activity) => activity.id === id);
   if (index === -1) return null;
 
-  const newArray = activities.reduce((arr, currentActivity) => {
-    if (currentActivity.id === newActivityWithId.id) {
-      return [...arr, newActivityWithId];
+  // Forma 1:
+  // const newArray = activities.reduce((arr, currentActivity) => {
+  //   if (currentActivity.id === newActivityWithId.id) {
+  //     return [...arr, newActivityWithId];
+  //   }
+  //   return [...arr, currentActivity];
+  // }, []);
+
+  // Forma 2:
+  const newArray = activities.map((activity) => {
+    if (activity.id === newActivityWithId.id) {
+      return newActivityWithId;
     }
-    return [...arr, currentActivity];
-  }, []);
+    return activity;
+  });
 
   await writeActivities(newArray);
   return newActivityWithId;
