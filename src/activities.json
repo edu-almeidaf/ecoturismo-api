@@ -28,15 +28,5 @@
       "difficulty": "Difícil",
       "createdAt": "18/04/2020"
     }
-  },
-  {
-    "id": 4,
-    "name": "Natação",
-    "price": 1,
-    "description": {
-      "rating": 1,
-      "difficulty": "Médio",
-      "createdAt": "13/02/2022"
-    }
   }
 ]

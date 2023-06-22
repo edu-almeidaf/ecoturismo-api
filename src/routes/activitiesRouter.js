@@ -1,7 +1,7 @@
 const express = require('express');
 
 const {
-  getAllActivities, getActivityById, addActivity, updateActivity
+  getAllActivities, getActivityById, addActivity, updateActivity, deleteActivity
 } = require('../utils/fsUtils');
 const validateToken = require('../middleware/validateToken');
 const validateName = require('../middleware/validateName');
@@ -57,6 +57,14 @@ router.put('/:id', validateToken, validateName, validatePrice,
   return res.status(200).json({
     message: 'Atividade atualizada com sucesso!',
   });
+});
+
+router.delete('/:id', validateToken, async (req, res) => {
+  const { id } = req.params;
+
+  await deleteActivity(Number(id));
+
+  return res.status(204).end();
 });
 
 module.exports = router;

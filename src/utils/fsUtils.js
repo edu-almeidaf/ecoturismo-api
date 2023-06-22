@@ -68,9 +68,17 @@ const updateActivity = async (id, newActivity) => {
   return newActivityWithId;
 };
 
+const deleteActivity = async (id) => {
+  const activities = await readActivities();
+  const updatedActivity = activities.filter((activity) => activity.id !== id);
+
+  await writeActivities(updatedActivity)
+};
+
 module.exports = {
   getAllActivities,
   getActivityById,
   addActivity,
   updateActivity,
+  deleteActivity,
 }
